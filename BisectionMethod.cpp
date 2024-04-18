@@ -1,42 +1,50 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-double Function(double x)
+#define ld long double
+
+ld f(ld x)
 {
     return x * x - 4;
 }
-double Error(double a, double b)
+ld Error(ld a, ld b)
 {
     return abs((a - b) / a);
 }
-double Bisection(double a, double b, double maxError)
+int iter = 0;
+ld Bisection(ld a, ld b, ld error)
 {
-    double c = 0;
-    while (Error(a, b) > maxError)
+    ld c = 0;
+    while (Error(a, b) > error)
     {
         c = (a + b) / 2;
-        if (Function(c) == 0)
+        cout << iter << "\t\t" << a << "\t\t" << b << "\t\t" << c << "\t\t" << fixed << setprecision(4) << Error(a, b) << endl;
+        if (f(c) == 0)
         {
             return c;
         }
-        else if (Function(c) * Function(a) < 0)
-        {
+        else if (f(c) * f(a) < 0)
             b = c;
-        }
         else
-        {
             a = c;
-        }
-        cout << "a: " << a << " b: " << b << " c: " << c << " Error: " << Error(a, b) << endl;
+        iter++;
     }
+    cout << "The root of the equation is:" << endl;
     return c;
 }
 
 int main()
 {
-    double a = 0;
-    double b = 3;
-    double maxError = 0.00000001;
-    cout << "Root: " << Bisection(a, b, maxError) << endl;
+    ld a = 3;
+    ld b = 0;
+    ld error = 0.01;
+    cout << "Bisection Method" << endl;
+    cout << "Iter"
+         << "\t\ta: "
+         << "\t\tb: "
+         << "\t\tc: "
+         << "\t\tError: " << endl;
+    cout << Bisection(a, b, error) << endl;
+
     return 0;
 }
