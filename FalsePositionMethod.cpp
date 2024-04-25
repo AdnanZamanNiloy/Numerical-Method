@@ -5,7 +5,7 @@ using namespace std;
 
 ld f(ld x)
 {
-    return x * x - 4;
+    return x * x * x - 4 * x - 5;
 }
 ld Error(ld a, ld b)
 {
@@ -18,7 +18,7 @@ ld FalsePosition(ld a, ld b, ld error)
     while (Error(a, b) > error)
     {
         c = (a * f(b) - b * f(a)) / (f(b) - f(a));
-        cout << iter << "\t\t" << a << "\t\t" << b << "\t\t" << c << "\t\t" << fixed << setprecision(4) << Error(a, b) << endl;
+        cout << fixed << setprecision(4) << iter << "\t\t" << a << "\t\t" << b << "\t\t" << c << "\t\t" << Error(a, b) << endl;
         if (f(c) == 0)
         {
             return c;
